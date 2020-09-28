@@ -1,0 +1,335 @@
+[
+  {
+    "qIsHidden": true,
+    "qIsSystem": true,
+    "qName": "$Field",
+    "qCardinal": 23,
+    "qTags": [
+      "$key",
+      "$hidden",
+      "$system",
+      "$ascii",
+      "$text"
+    ],
+    "qSrcTables": []
+  },
+  {
+    "qIsHidden": true,
+    "qIsSystem": true,
+    "qName": "$FieldNo",
+    "qCardinal": 9,
+    "qTags": [
+      "$hidden",
+      "$system",
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": []
+  },
+  {
+    "qIsHidden": true,
+    "qIsSystem": true,
+    "qName": "$Fields",
+    "qCardinal": 4,
+    "qTags": [
+      "$hidden",
+      "$system",
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": []
+  },
+  {
+    "qIsHidden": true,
+    "qIsSystem": true,
+    "qName": "$Info",
+    "qCardinal": 1,
+    "qTags": [
+      "$hidden",
+      "$system",
+      "$ascii",
+      "$text"
+    ],
+    "qSrcTables": []
+  },
+  {
+    "qIsHidden": true,
+    "qIsSystem": true,
+    "qName": "$Rows",
+    "qCardinal": 5,
+    "qTags": [
+      "$hidden",
+      "$system",
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": []
+  },
+  {
+    "qIsHidden": true,
+    "qIsSystem": true,
+    "qName": "$Table",
+    "qCardinal": 5,
+    "qTags": [
+      "$key",
+      "$hidden",
+      "$system",
+      "$ascii",
+      "$text"
+    ],
+    "qSrcTables": []
+  },
+  {
+    "qName": "CATEGORIA_ID",
+    "qCardinal": 8,
+    "qTags": [
+      "$key",
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "CATEGORIA",
+      "PRODUTO"
+    ]
+  },
+  {
+    "qName": "CLIENTE_ID",
+    "qCardinal": 295,
+    "qTags": [
+      "$key",
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "CLIENTE",
+      "PEDIDO"
+    ]
+  },
+  {
+    "qName": "CODIGO_IBGE",
+    "qCardinal": 295,
+    "qTags": [
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "CLIENTE"
+    ]
+  },
+  {
+    "qName": "CONTATO_CLIENTE",
+    "qCardinal": 295,
+    "qTags": [
+      "$ascii",
+      "$text"
+    ],
+    "qSrcTables": [
+      "CLIENTE"
+    ]
+  },
+  {
+    "qName": "CUSTOPRODUTO",
+    "qCardinal": 1140,
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "DETALHE_PEDIDO"
+    ]
+  },
+  {
+    "qName": "CUSTO_UNITARIO",
+    "qCardinal": 75,
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "PRODUTO"
+    ]
+  },
+  {
+    "qName": "DATA_PEDIDO",
+    "qCardinal": 547,
+    "qTags": [
+      "$numeric",
+      "$integer",
+      "$timestamp",
+      "$date"
+    ],
+    "qSrcTables": [
+      "PEDIDO"
+    ]
+  },
+  {
+    "qName": "DESCONTO",
+    "qCardinal": 12,
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "DETALHE_PEDIDO"
+    ]
+  },
+  {
+    "qName": "ENDERECO_CLIENTE",
+    "qCardinal": 295,
+    "qTags": [
+      "$ascii",
+      "$text"
+    ],
+    "qSrcTables": [
+      "CLIENTE"
+    ]
+  },
+  {
+    "qName": "FORNECEDOR_ID",
+    "qCardinal": 29,
+    "qTags": [
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "PRODUTO"
+    ]
+  },
+  {
+    "qName": "MARGEM",
+    "qCardinal": 1879,
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "DETALHE_PEDIDO"
+    ]
+  },
+  {
+    "qName": "NOME_CATEGORIA",
+    "qCardinal": 8,
+    "qTags": [
+      "$text"
+    ],
+    "qSrcTables": [
+      "CATEGORIA"
+    ]
+  },
+  {
+    "qName": "NOME_CLIENTE",
+    "qCardinal": 295,
+    "qTags": [
+      "$ascii",
+      "$text"
+    ],
+    "qSrcTables": [
+      "CLIENTE"
+    ]
+  },
+  {
+    "qName": "PEDIDO_ID",
+    "qCardinal": 1672,
+    "qTags": [
+      "$key",
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "DETALHE_PEDIDO",
+      "PEDIDO"
+    ]
+  },
+  {
+    "qName": "PRECOUNITARIOPEDIDO",
+    "qCardinal": 1697,
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "DETALHE_PEDIDO"
+    ]
+  },
+  {
+    "qName": "PRECO_UNITARIO",
+    "qCardinal": 60,
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "PRODUTO"
+    ]
+  },
+  {
+    "qName": "PRODUTO",
+    "qCardinal": 77,
+    "qTags": [
+      "$text"
+    ],
+    "qSrcTables": [
+      "PRODUTO"
+    ]
+  },
+  {
+    "qName": "PRODUTO_ID",
+    "qCardinal": 77,
+    "qTags": [
+      "$key",
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "DETALHE_PEDIDO",
+      "PRODUTO"
+    ]
+  },
+  {
+    "qName": "QUANTIDADE",
+    "qCardinal": 56,
+    "qTags": [
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "DETALHE_PEDIDO"
+    ]
+  },
+  {
+    "qName": "TRANSPORTADOR_ID",
+    "qCardinal": 3,
+    "qTags": [
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "PEDIDO"
+    ]
+  },
+  {
+    "qName": "VALORBRUTO",
+    "qCardinal": 2071,
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "DETALHE_PEDIDO"
+    ]
+  },
+  {
+    "qName": "VALORLIQUIDO",
+    "qCardinal": 2098,
+    "qTags": [
+      "$numeric"
+    ],
+    "qSrcTables": [
+      "DETALHE_PEDIDO"
+    ]
+  },
+  {
+    "qName": "VENDEDOR_ID",
+    "qCardinal": 9,
+    "qTags": [
+      "$numeric",
+      "$integer"
+    ],
+    "qSrcTables": [
+      "PEDIDO"
+    ]
+  }
+]

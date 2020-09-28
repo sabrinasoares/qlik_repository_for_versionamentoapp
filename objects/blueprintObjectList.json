@@ -1,0 +1,20 @@
+{
+  "qInfos": [
+    {
+      "qId": "LoadModel",
+      "qType": "LoadModel"
+    },
+    {
+      "qId": "SGvJAMr",
+      "qType": "barchart"
+    },
+    {
+      "qId": "e0c07e0b-24a0-4d90-9fba-3cfe42307be5",
+      "qType": "appprops"
+    },
+    {
+      "qId": "e762d569-cdf2-41bf-aba3-8223c946f60c",
+      "qType": "sheet"
+    }
+  ]
+}

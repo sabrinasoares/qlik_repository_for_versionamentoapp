@@ -1,0 +1,21 @@
+[
+  {
+    "qProperty": {
+      "qInfo": {
+        "qId": "e0c07e0b-24a0-4d90-9fba-3cfe42307be5",
+        "qType": "appprops"
+      },
+      "qMetaDef": {},
+      "sheetTitleBgColor": "",
+      "sheetTitleGradientColor": "",
+      "sheetTitleColor": "",
+      "sheetLogoThumbnail": {
+        "qStaticContentUrlDef": {}
+      },
+      "sheetLogoPosition": "",
+      "rtl": false,
+      "theme": "card"
+    },
+    "qChildren": []
+  }
+]
