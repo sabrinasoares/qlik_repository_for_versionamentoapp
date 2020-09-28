@@ -33,12 +33,12 @@
     {
       "qId": "e762d569-cdf2-41bf-aba3-8223c946f60c",
       "qType": "sheet",
-      "modifiedDate": "2020-09-28T14:27:42.659Z"
+      "modifiedDate": "2020-09-28T14:34:25.106Z"
     },
     {
       "qId": "f08ecae3-b77e-4188-a735-dff37f956f90",
       "qType": "sheet",
-      "modifiedDate": "2020-09-28T13:59:39.772Z"
+      "modifiedDate": "2020-09-28T14:35:47.375Z"
     },
     {
       "qId": "kSJK",
@@ -46,6 +46,10 @@
     },
     {
       "qId": "vrYpMf",
+      "qType": "barchart"
+    },
+    {
+      "qId": "znDQxfW",
       "qType": "barchart"
     }
   ]
