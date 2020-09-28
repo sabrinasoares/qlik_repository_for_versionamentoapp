@@ -1,6 +1,10 @@
 {
   "qInfos": [
     {
+      "qId": "15065770-0adb-47ff-91d6-d26b78e81886",
+      "qType": "story"
+    },
+    {
       "qId": "LoadModel",
       "qType": "LoadModel"
     },
@@ -9,12 +13,28 @@
       "qType": "barchart"
     },
     {
+      "qId": "aSNMHY",
+      "qType": "piechart"
+    },
+    {
       "qId": "e0c07e0b-24a0-4d90-9fba-3cfe42307be5",
       "qType": "appprops"
     },
     {
       "qId": "e762d569-cdf2-41bf-aba3-8223c946f60c",
       "qType": "sheet"
+    },
+    {
+      "qId": "f08ecae3-b77e-4188-a735-dff37f956f90",
+      "qType": "sheet"
+    },
+    {
+      "qId": "kSJK",
+      "qType": "slide"
+    },
+    {
+      "qId": "vrYpMf",
+      "qType": "barchart"
     }
   ]
 }
