@@ -6,7 +6,8 @@
     },
     "qMetaDef": {
       "title": "Dashboard",
-      "description": ""
+      "description": "",
+      "isBlueprintItem": true
     },
     "rank": 1,
     "thumbnail": {

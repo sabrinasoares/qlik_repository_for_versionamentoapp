@@ -1,0 +1,184 @@
+///$tab Auto-generated section
+Set dataManagerTables = '','Contratos','Dim_Loja','Dim_ObjFinanciado','Dim_Operador','Dim_Produto','Dim_Segmentacao','Dim_Geografia','BRASIL.shp/Features';
+//This block renames script tables from non generated section which conflict with the names of managed tables
+
+For each name in $(dataManagerTables) 
+    Let index = 0;
+    Let currentName = name; 
+    Let tableNumber = TableNumber(name); 
+    Let matches = 0; 
+    Do while not IsNull(tableNumber) or (index > 0 and matches > 0)
+        index = index + 1; 
+        currentName = name & '-' & index; 
+        tableNumber = TableNumber(currentName) 
+        matches = Match('$(currentName)', $(dataManagerTables));
+    Loop 
+    If index > 0 then 
+            Rename Table '$(name)' to '$(currentName)'; 
+    EndIf; 
+Next; 
+Set dataManagerTables = ;
+
+
+Unqualify *;
+
+__cityAliasesBase:
+LOAD
+	Alias AS [__City],
+	geoKey AS [__geoKey],
+	CountryCode AS [__CityCountryCode]
+FROM [lib://__GEO_TABLES/cityAliases.qvd]
+(qvd);
+
+__cityGeoBase:
+LOAD
+	geoKey AS [__geoKey],
+	geoPoint AS [__GeoPoint]
+FROM [lib://__GEO_TABLES/cityGeo.qvd]
+(qvd);
+
+__cityName2Key:
+MAPPING LOAD
+	__City,
+	__geoKey
+RESIDENT __cityAliasesBase;
+
+__cityKey2GeoPoint:
+MAPPING LOAD
+	__geoKey,
+	__GeoPoint
+RESIDENT __cityGeoBase;
+
+[Contratos]:
+LOAD
+	[cod_TabelaFin] AS [Contratos.cod_TabelaFin],
+	[cod_setor_loja],
+	[cod_loja],
+	[cod_Produto],
+	[cod_Operador],
+	[cod_Filial],
+	[cod_Obj],
+	Date([Data] ) AS [Data],
+	[Número Contrato],
+	[Valor Principal IOF],
+	[Prazo],
+	[Taxa Mês],
+	[Spread],
+	MID('ABCDEFGHI', FLOOR(10*NORMDIST( RAND(), 0.5, 0.5)) ,1) AS [Score],
+	If([Prazo] < 11, Dual('[, 11)', 1),If([Prazo] >= 11 and [Prazo] < 21, Dual('[11, 21)', 2),If([Prazo] >= 21 and [Prazo] < 31, Dual('[21, 31)', 3),If([Prazo] >= 31 and [Prazo] < 41, Dual('[31, 41)', 4),If([Prazo] >= 41 and [Prazo] < 51, Dual('[41, 51)', 5),If([Prazo] >= 51, Dual('[51, )', 6))))))) AS [Prazo (Bucketed)];
+LOAD
+	[cod_TabelaFin],
+	[cod_setor_loja],
+	[cod_loja],
+	[cod_Produto],
+	[cod_Operador],
+	[cod_Filial],
+	[cod_Obj],
+	[Data],
+	[Número Contrato],
+	[Valor Principal IOF],
+	[Prazo],
+	[Taxa Mês],
+	[Spread]
+ FROM [lib://SourceFiles/Contratos.qvd]
+(qvd);
+
+LIB CONNECT TO [C--Users-cuv-OneDrive - QlikTech Inc-Backup Nayam-Consumer Finance-SourceFiles-ConsumerFinance.mdb];
+
+[Dim_Loja]:
+SQL SELECT `Bandeira Loja`,
+	`cod_loja`,
+	`Conglomerado Comercial`,
+	`Nome Loja`,
+	`UF Loja`
+FROM `Dim_Loja`;
+
+[Dim_ObjFinanciado]:
+LOAD
+	[cod_Obj],
+	[DS_OBJ] AS [Item Financiado];
+SQL SELECT `cod_Obj`,
+	`DS_OBJ`
+FROM `Dim_ObjFinanciado`;
+
+[Dim_Operador]:
+SQL SELECT `cod_Operador`,
+	`Nome_Operador`
+FROM `Dim_Operador`;
+
+[Dim_Produto]:
+SQL SELECT `cod_Produto`,
+	`Desc_Produto`
+FROM `Dim_Produto`;
+
+[Dim_Segmentacao]:
+SQL SELECT `cod_setor_loja`,
+	`Nome Setor Loja`,
+	`Segmento`,
+	`Subsegmento`
+FROM `Dim_Segmentacao`;
+
+[Dim_Geografia]:
+LOAD
+	[Área Comercial],
+	[Cidade],
+	[cod_Filial],
+	[Estado] AS [BRASIL.Name-Estado],
+	[Latitude],
+	[Longitude],
+	[Nome Filial],
+	[Região],
+	APPLYMAP( '__cityKey2GeoPoint', APPLYMAP( '__cityName2Key', LOWER([Cidade])), '-') AS [Dim_Geografia.Cidade_GeoInfo],
+	GeoMakePoint([Latitude], [Longitude]) AS [Longitude_Latitude];
+SQL SELECT `Área Comercial`,
+	`Cidade`,
+	`cod_Filial`,
+	`Estado`,
+	`Latitude`,
+	`Longitude`,
+	`Nome Filial`,
+	`Região`
+FROM `Dim_Geografia`;
+
+[BRASIL.shp/Features]:
+LOAD
+	[BRASIL.Name] AS [BRASIL.Name-Estado],
+	[BRASIL.Area];
+LOAD
+	[BRASIL.Name],
+	[BRASIL.Area]
+ FROM [lib://SourceFiles/BRASIL.kml]
+(kml, Table is [BRASIL.shp/Features]);
+
+
+
+TAG FIELD [Cidade] WITH '$geoname', '$relates_Dim_Geografia.Cidade_GeoInfo';
+TAG FIELD [Dim_Geografia.Cidade_GeoInfo] WITH '$geopoint', '$hidden', '$relates_Cidade';
+
+DROP TABLES __cityAliasesBase, __cityGeoBase;
+[autoCalendar]: 
+  DECLARE FIELD DEFINITION Tagged ('$date')
+FIELDS
+  Dual(Year($1), YearStart($1)) AS [Year] Tagged ('$axis', '$year'),
+  Dual('Q'&Num(Ceil(Num(Month($1))/3)),Num(Ceil(NUM(Month($1))/3),00)) AS [Quarter] Tagged ('$quarter', '$cyclic'),
+  Dual(Year($1)&'-Q'&Num(Ceil(Num(Month($1))/3)),QuarterStart($1)) AS [YearQuarter] Tagged ('$yearquarter', '$qualified'),
+  Dual('Q'&Num(Ceil(Num(Month($1))/3)),QuarterStart($1)) AS [_YearQuarter] Tagged ('$yearquarter', '$hidden', '$simplified'),
+  Month($1) AS [Month] Tagged ('$month', '$cyclic'),
+  Dual(Year($1)&'-'&Month($1), monthstart($1)) AS [YearMonth] Tagged ('$axis', '$yearmonth', '$qualified'),
+  Dual(Month($1), monthstart($1)) AS [_YearMonth] Tagged ('$axis', '$yearmonth', '$simplified', '$hidden'),
+  Dual('W'&Num(Week($1),00), Num(Week($1),00)) AS [Week] Tagged ('$weeknumber', '$cyclic'),
+  Date(Floor($1)) AS [Date] Tagged ('$axis', '$date', '$qualified'),
+  Date(Floor($1), 'D') AS [_Date] Tagged ('$axis', '$date', '$hidden', '$simplified'),
+  If (DayNumberOfYear($1) <= DayNumberOfYear(Today()), 1, 0) AS [InYTD] ,
+  Year(Today())-Year($1) AS [YearsAgo] ,
+  If (DayNumberOfQuarter($1) <= DayNumberOfQuarter(Today()),1,0) AS [InQTD] ,
+  4*Year(Today())+Ceil(Month(Today())/3)-4*Year($1)-Ceil(Month($1)/3) AS [QuartersAgo] ,
+  Ceil(Month(Today())/3)-Ceil(Month($1)/3) AS [QuarterRelNo] ,
+  If(Day($1)<=Day(Today()),1,0) AS [InMTD] ,
+  12*Year(Today())+Month(Today())-12*Year($1)-Month($1) AS [MonthsAgo] ,
+  Month(Today())-Month($1) AS [MonthRelNo] ,
+  If(WeekDay($1)<=WeekDay(Today()),1,0) AS [InWTD] ,
+  (WeekStart(Today())-WeekStart($1))/7 AS [WeeksAgo] ,
+  Week(Today())-Week($1) AS [WeekRelNo] ;
+
+DERIVE FIELDS FROM FIELDS [Data] USING [autoCalendar] ;

@@ -1,0 +1,8 @@
+///$tab Fluxo Financeiro
+Fluxo:
+Load 
+	[Número Contrato],
+    MonthStart(Data,IterNo()) as MesCompetencia,
+    [Valor Principal IOF]/[Prazo] as [Valor Parcela]
+Resident Contratos
+While IterNo() <= Prazo;
